@@ -1,23 +1,24 @@
 import { useState } from "react";
 import AddTask from "./components/AddTask";
 import Tasks from "./components/Tasks";
+import { v4 } from "uuid";
 
 function App() {
   const [tasks, setTasks] = useState([
     {
-      id: 1,
+      id: v4(),
       title: "Estudar React",
       description: "Estudar React para criar aplicações web",
       isCompleted: false,
     },
     {
-      id: 2,
+      id: v4(),
       title: "Estudar Tailwind CSS",
       description: "Estudar Tailwind CSS para estilizar aplicações web",
       isCompleted: false,
     },
     {
-      id: 3,
+      id: v4(),
       title: "Estudar TypeScript",
       description:
         "Estudar TypeScript para adicionar tipagem em aplicações web",
@@ -46,14 +47,25 @@ function App() {
     setTasks(newTasks);
   }
 
+  function onAddTaskSubmit(title, description) {
+    const newTask = {
+      id: v4(),
+      title,
+      description,
+      isCompleted: false,
+    };
+
+    setTasks([...tasks, newTask]);
+  }
+
   return (
     <div className="flex h-screen w-screen justify-center bg-slate-500 p-6">
-      <div className="w-[500px]">
+      <div className="w-[500px] space-y-4">
         <h1 className="text-center text-3xl font-bold text-slate-100">
           Gerenciador de Tarefas
         </h1>
 
-        <AddTask />
+        <AddTask {...{ onAddTaskSubmit }} />
         <Tasks {...{ tasks, onTaskClick, onRemoveTask }} />
       </div>
     </div>
