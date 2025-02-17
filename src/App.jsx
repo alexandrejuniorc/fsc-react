@@ -1,30 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./components/AddTask";
 import Tasks from "./components/Tasks";
 import { v4 } from "uuid";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: v4(),
-      title: "Estudar React",
-      description: "Estudar React para criar aplicações web",
-      isCompleted: false,
-    },
-    {
-      id: v4(),
-      title: "Estudar Tailwind CSS",
-      description: "Estudar Tailwind CSS para estilizar aplicações web",
-      isCompleted: false,
-    },
-    {
-      id: v4(),
-      title: "Estudar TypeScript",
-      description:
-        "Estudar TypeScript para adicionar tipagem em aplicações web",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || [],
+  );
 
   function onRemoveTask(taskId) {
     const newTasks = tasks.filter((task) => task.id !== taskId);
@@ -57,6 +39,10 @@ function App() {
 
     setTasks([...tasks, newTask]);
   }
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <div className="flex h-screen w-screen justify-center bg-slate-500 p-6">
