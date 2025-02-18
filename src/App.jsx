@@ -46,15 +46,14 @@ function App() {
   }, [tasks]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-vars
-    async function fetchTasks() {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/todos?_limit=10",
-        { method: "GET" },
-      );
-      const data = await response.json();
-      setTasks(data);
-    }
+    // async function fetchTasks() {
+    //   const response = await fetch(
+    //     "https://jsonplaceholder.typicode.com/todos?_limit=10",
+    //     { method: "GET" },
+    //   );
+    //   const data = await response.json();
+    //   setTasks(data);
+    // }
     // SE QUISER, VOCÊ PODE CHAMAR UMA API PARA PEGAR AS TAREFAS
     // fetchTasks();
   }, []);
@@ -62,6 +61,8 @@ function App() {
     <div className="flex h-screen w-screen justify-center bg-slate-500 p-6">
       <div className="w-[500px] space-y-4">
         <Title>Gerenciador de Tarefas</Title>
+
+        {/* <Test /> */}
 
         <AddTask {...{ onAddTaskSubmit }} />
         <Tasks {...{ tasks, onTaskClick, onRemoveTask }} />
