@@ -1,36 +1,39 @@
 import { useState } from "react";
+import Input from "./Input";
 
 function AddTask({ onAddTaskSubmit }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  function onAddTaskClick() {
+    // verificar se o titulo e a descrição estão preenchidos
+    if (!title.trim() || !description.trim()) {
+      return alert("Preencha o título e a descrição da tarefa");
+    }
+
+    onAddTaskSubmit(title, description);
+    setTitle("");
+    setDescription("");
+  }
+
   return (
     <div className="flex flex-col space-y-4 rounded-md bg-slate-200 p-6 shadow">
-      <input
+      <Input
         type="text"
         value={title}
-        onChange={(event) => setTitle(event.target.value)}
         placeholder="Digite o título da tarefa"
-        className="rounded-md border border-slate-400 px-4 py-2 outline-slate-400"
+        onChange={(event) => setTitle(event.target.value)}
       />
-      <input
+
+      <Input
         type="text"
         value={description}
-        onChange={(event) => setDescription(event.target.value)}
         placeholder="Digite a descrição da tarefa"
-        className="rounded-md border border-slate-400 px-4 py-2 outline-slate-400"
+        onChange={(event) => setDescription(event.target.value)}
       />
-      <button
-        onClick={() => {
-          // verificar se o titulo e a descrição estão preenchidos
-          if (!title.trim() || !description.trim()) {
-            return alert("Preencha o título e a descrição da tarefa");
-          }
 
-          onAddTaskSubmit(title, description);
-          setTitle("");
-          setDescription("");
-        }}
+      <button
+        onClick={onAddTaskClick}
         className="rounded-md bg-slate-500 px-4 py-2 font-medium text-white"
       >
         Adicionar

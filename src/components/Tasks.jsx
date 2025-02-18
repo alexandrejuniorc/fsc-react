@@ -1,5 +1,6 @@
 import { ChevronRightIcon, TrashIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Button from "./Button";
 
 function Tasks({ tasks, onTaskClick, onRemoveTask }) {
   const navigate = useNavigate();
@@ -22,19 +23,13 @@ function Tasks({ tasks, onTaskClick, onRemoveTask }) {
             {task.title}
           </button>
 
-          <button
-            onClick={() => onSeeDetailsClick(task)}
-            className="rounded-md bg-slate-400 p-2 text-white"
-          >
+          <Button onClick={() => onSeeDetailsClick(task)}>
             <ChevronRightIcon />
-          </button>
+          </Button>
 
-          <button
-            onClick={() => onRemoveTask(task.id)}
-            className="rounded-md bg-slate-400 p-2 text-white"
-          >
+          <Button onClick={() => onRemoveTask(task.id)}>
             <TrashIcon />
-          </button>
+          </Button>
         </li>
       ))}
     </ul>
