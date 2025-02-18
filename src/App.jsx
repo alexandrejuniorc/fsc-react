@@ -61,9 +61,7 @@ function App() {
     <div className="flex h-screen w-screen justify-center bg-slate-500 p-6">
       <div className="w-[500px] space-y-4">
         <Title>Gerenciador de Tarefas</Title>
-
         {/* <Test /> */}
-
         <AddTask {...{ onAddTaskSubmit }} />
         <Tasks {...{ tasks, onTaskClick, onRemoveTask }} />
       </div>
